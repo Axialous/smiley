@@ -3,41 +3,41 @@
     margin: 0;
 
     box-sizing: border-box;
-
-    transition: 512ms;
 }
 
 :root {
-    font-size: calc(min(100vh, 100vw) * 0.75);
+    font-size: calc(min(100vh, 100vw) * 0.70);
     overflow: hidden;
     
     --an-visage: 0deg;
 
     --c-f-peau: hsl(46, 100%, 50%);
     
+    --an-yeux: 0deg;
     --c-f-yeux: hsl(0, 0%, 0%);
     --c-b-yeux: hsl(0, 0%, 0%);
     --e-b-yeux: 0.25em;
     --r-b-yeux: 0.5em;
     --l-yeux: 100%;
     --h-yeux: 100%;
-    --d-h-yeux: 0;
-    --d-v-yeux: 0;
 
-    --c-f-bouche: hsl(0, 100%, 50%);
+    --c-f-bouche: hsl(0, 87%, 47%);
     --e-b-bouche: 0.25em;
     --c-b-bouche: hsl(0, 0%, 0%);
     --r-b-bouche: 0 0 50% 50% / 0 0 100% 100%;
     --l-bouche: 100%;
     --h-bouche: 100%;
-    /*--c-f-dents: hsl(0, 0%, 100%);
-    --h-dents: 0.5em;*/
+
+    --c-f-deco: transparent;
+    --ch-f-deco: path("M 0 0 L 0 0 L 0 0 Z");
 }
 
 
 body {
     display: grid;
     place-items: center;
+
+    background: linear-gradient(to top, rgb(92, 206, 92), rgb(201, 227, 245));
   
     height: 100vh;
     width: 100vw;
@@ -59,6 +59,8 @@ body {
     width: 1rem;
 
     transform: rotateZ(var(--an-visage));
+
+    transition: background 512ms, transform 512ms;
 }
 
 .oeil {
@@ -71,14 +73,20 @@ body {
 
     height: var(--h-yeux);
     width: var(--l-yeux);
+
+    transition: 512ms;
 }
 
 .oeil.gauche {
     grid-area: 2 / 2 / span 1 / span 1;
+
+    transform: rotateZ(var(--an-yeux));
 }
 
 .oeil.droit {
     grid-area: 2 / 4 / span 1 / span 1;
+
+    transform: rotateY(180deg) rotateZ(var(--an-yeux));
 }
 
 .bouche {
@@ -95,12 +103,23 @@ body {
 
     height: var(--h-bouche);
     width: var(--l-bouche);
-    /*overflow: hidden;*/
+
+    transition: 512ms;
 }
 
-/*.dents {
-    background: var(--c-f-dents);
-    
-    width: 100%;
-    height: var(--h-dents);
-}*/
+.deco {
+    position: absolute;
+    top: -0.5em;
+    left: -0.5em;
+
+    background: var(--c-f-deco);
+    clip-path: var(--ch-f-deco);
+
+    height: 44px;
+    width: 44px;
+
+    transform-origin: left top;
+    transform: scale(1, 1);
+
+    transition: background 512ms;
+}
